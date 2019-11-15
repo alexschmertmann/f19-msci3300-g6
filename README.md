@@ -1,9 +1,7 @@
 # f19-msci3300-g6
 Group 6 repository for South Liberty Public Library project
 
-<<<<<<< HEAD
 Create Table Materials
-USE f19_msci3300;
 CREATE TABLE group7_materials(
 MaterialID int(11) NOT NULL AUTO_INCREMENT,
 MaterialClass varchar(25) NOT NULL,
@@ -15,8 +13,8 @@ Copyright int(4),
 ISBN int(15) NOT NULL,
 DateAdded DATETIME NOT NULL,
 LastModified DATETIME NOT NULL,
-)ENGINE=InnoDB AUTO_INCREMENT;
-=======
+PRIMARY KEY (MaterialID)
+)ENGINE=InnoDB AUTO_INCREMENT=1;
 
 USE f19_msci3300;
 
@@ -38,4 +36,3 @@ PRIMARY KEY ('patronId')
 
 INSERT INTO group7_patron(firstName, lastName, birthdate, address1, address2, city, state, zip, phonenumber1, email)
 VALUES ('Robert', 'California', '1/1/1961', 'Apt. # 100', '123 Main St.', 'South Liberty', 'IA', '54345', '3195550001', 'ceo@sabre.com');
->>>>>>> 00e97a3078e3b30340cda0c450fbf29b1a580205
