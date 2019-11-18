@@ -5,9 +5,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DateField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 import pymysql
 import secrets
 import datetime
+
 
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
 app = Flask(__name__)
@@ -50,6 +52,17 @@ class MaterialForm(FlaskForm):
 def index():
     all_materials = group7_materials.query.all()
     return render_template('index.html', materials=all_materials, pageTitle='SLPL Materials')
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method =='POST':
+        form = request.form
+        search_value = form['search_string']
+        search = "%{0}%".format(search_value)
+        results = group7_materials.query.filter( or_(group7_materials.title.like(search), group7_materials.author.like(search))).all()
+        return render_template('index.html', materials=results, pageTitle='Materials', legend='Search Results')
+    else:
+        return redirect('/')
 
 @app.route('/material/new', methods=['GET', 'POST'])
 def add_material():
