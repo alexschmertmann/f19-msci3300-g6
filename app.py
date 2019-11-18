@@ -34,7 +34,7 @@ class group7_materials(db.Model):
         return "id: {0} | material class: {1} | call number: {2} | title: {3} | author: {4} | publisher: {5} | copyright: {6} | ISBN: {7} | date added: {8} | date modified: {9}".format(self.materialId, self.materialClass, self.callNumber, self.title, self.author, self.publisher, self.copyright, self.ISBN, self.dateAdded, self.lastModified)
 
 class MaterialForm(FlaskForm):
-    materialId = db.Column(db.Integer, primary_key=True)
+    materialId = IntegerField('Material ID: ')
     materialClass = StringField('Material Class:', validators=[DataRequired()])
     callNumber = StringField('Call Number:', validators=[DataRequired()])
     title = StringField('Title:', validators=[DataRequired()])
@@ -42,8 +42,8 @@ class MaterialForm(FlaskForm):
     publisher = StringField('Publisher:', validators=[DataRequired()])
     copyright = StringField('Copyright:')
     ISBN = IntegerField('ISBN:', validators=[DataRequired()])
-    dateAdded = db.Column(db.DateTime)
-    lastModified = db.Column(db.DateTime)
+    dateAdded = DateField('Date Added: ')
+    lastModified = DateField('Date Last Modified: ')
 
 
 @app.route('/')
@@ -83,23 +83,20 @@ def update_material(materialId):
         material.ISBN = form.ISBN.data
         material.dateAdded = form.dateAdded.data
         material.lastModified = datetime.datetime.now()
-        db.session.update(material)
         db.session.commit()
-        flash('Your material has been updated.')
-        return redirect(url_for('material', materialId=material.materialId))
+        return redirect('/')
     #elif request.method == 'GET':
-
-    materialId = form.materialId
-    material.materialClass = form.materialClass
-    material.callNumber = form.callNumber
-    material.title = form.title
-    material.author = form.author
-    material.publisher = form.publisher
-    material.copyright = form.copyright
-    material.ISBN = form.ISBN
-    material.dateAdded = form.dateAdded
-    material.lastModified = form.lastModified
-    return render_template('add_material.html', form=form, pageTitle='Update Material',legend="Update A Material")
+    form.materialId = material.materialId
+    form.materialClass = material.materialClass
+    form.callNumber = material.callNumber
+    form.title = material.title
+    form.author = material.author
+    form.publisher = material.publisher
+    form.copyright = material.copyright
+    form.ISBN = material.ISBN
+    form.dateAdded = material.dateAdded
+    form.lastModified = material.lastModified
+    return render_template('update_material.html', form=form, pageTitle='Update Material',legend="Update A Material")
 
 @app.route('/material/<int:materialId>/delete', methods=['POST'])
 def delete_material(materialId):
@@ -115,3 +112,5 @@ def delete_material(materialId):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+app.config['DEBUG'] = True
