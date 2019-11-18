@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+<div>
+
+  <h3>{{ legend }}</h3>
+
+   </div>
+
+
+
+
+  <form method="POST" action="">
+
+    {{ form.csrf_token }}
+    {{ form.materialClass.label }} {{ form.materialClass }} <br>
+    {{ form.callNumber.label }} {{ form.callNumber }}<br>
+    {{ form.title.label }} {{ form.title }}<br>
+    {{ form.author.label }} {{ form.author }}<br>
+    {{ form.publisher.label }} {{ form.publisher }}<br>
+    {{ form.copyright.label }} {{ form.copyright }}<br>
+    {{ form.ISBN.label }} {{ form.ISBN }}
+
+    <input type="submit" value="Save">
+
+  </form>
+
+</div>
+{% endblock %}
