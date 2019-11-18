@@ -72,6 +72,7 @@ def material(materialId):
 def update_material(materialId):
     material = group7_materials.query.get_or_404(materialId)
     form = MaterialForm()
+
     if form.validate_on_submit():
         material.materialId = form.materialId.data
         material.materialClass = form.materialClass.data
@@ -85,17 +86,17 @@ def update_material(materialId):
         material.lastModified = datetime.datetime.now()
         db.session.commit()
         return redirect('/')
-    #elif request.method == 'GET':
-    form.materialId = material.materialId
-    form.materialClass = material.materialClass
-    form.callNumber = material.callNumber
-    form.title = material.title
-    form.author = material.author
-    form.publisher = material.publisher
-    form.copyright = material.copyright
-    form.ISBN = material.ISBN
-    form.dateAdded = material.dateAdded
-    form.lastModified = material.lastModified
+
+    form.materialId.data = material.materialId
+    form.materialClass.data = material.materialClass
+    form.callNumber.data = material.callNumber
+    form.title.data = material.title
+    form.author.data = material.author
+    form.publisher.data = material.publisher
+    form.copyright.data = material.copyright
+    form.ISBN.data = material.ISBN
+    form.dateAdded.data = material.dateAdded
+    form.lastModified.data = material.lastModified
     return render_template('update_material.html', form=form, pageTitle='Update Material',legend="Update A Material")
 
 @app.route('/material/<int:materialId>/delete', methods=['POST'])
