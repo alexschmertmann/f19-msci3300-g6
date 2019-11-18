@@ -1,7 +1,12 @@
 #Virtual Environment
 venv/
+<<<<<<< HEAD
+=======
+venv
+>>>>>>> lgldev
 env/
 env
+
 
 # Flask
 instance/*
