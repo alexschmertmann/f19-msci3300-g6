@@ -14,7 +14,7 @@
    {% endwith %}
  </div>
  <div class="container-fluid">
-<p><a href="{{ url_for('add_material')}}"> Add a new material</a></p>
+<p><a href="{{ url_for('add_material')}}" class="btn"> Add a new material</a></p>
 <form method ="POST">
   <input type="text" autofocus="autofocus" name="search_materials">
   <input type="submit" formaction="/searchmaterials" value="Search Materials">

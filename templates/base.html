@@ -18,12 +18,13 @@
 });
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'custom.css') }}"/>
 </head>
 
   <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">South Liberty Public Library</a>
+   <nav class="navbar navbar-expand-lg">
+         <img src="../static/images/FeedYourMind.png" width="50" height="50" alt="South Liberty Public Library">
+      <a class="navbar-brand" href="/"> South Liberty Public Library</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,7 +53,7 @@
       </div>
     </nav>
       <hr>
-      <h3>{{ legend }}</h3>
+      <h3 class="container-fluid">{{ legend }}</h3>
    <div class="container body-content">
       {% block body %}
 
