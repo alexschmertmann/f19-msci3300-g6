@@ -286,6 +286,7 @@ def check_in(materialId):
     else: #if it's a GET request, send them to the home page
         return redirect("/")
 
+<<<<<<< HEAD
 @app.route('/circulations/update', methods=['GET','POST'])
 def update_circulations(checkoutId):
     material = group7_materials.query.get_or_404(checkoutId)
@@ -306,6 +307,13 @@ def update_circulations(checkoutId):
     form.dayRented.data = circulation.dayRented
     form.dueDate.data = circulation.dueDate
     return render_template('update_circulation.html', form=form, pageTitle='Update Material',legend="Update A Material")
+=======
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+>>>>>>> about page
 
 if __name__ == '__main__':
     app.run(debug=True)
