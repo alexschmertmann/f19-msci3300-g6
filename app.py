@@ -87,6 +87,17 @@ def index():
     all_patrons = group7_patron.query.all()
     return render_template('index.html', materials=all_materials, patrons=all_patrons, pageTitle='South Liberty Public Library')
 
+@app.route('/materials')
+def materials():
+    all_materials = group7_materials.query.all()
+    return render_template('materials.html', materials=all_materials, pageTitle='Materials')
+
+@app.route('/patrons')
+def patrons():
+    all_patrons = group7_patron.query.all()
+    return render_template('patrons.html', patrons= all_patrons, pageTitle = 'Patrons')
+
+
 @app.route('/searchmaterials', methods=['GET', 'POST'])
 def search_materials():
     if request.method =='POST':
@@ -94,7 +105,7 @@ def search_materials():
         search_value = form['search_materials']
         search = "%{0}%".format(search_value)
         results = group7_materials.query.filter( or_(group7_materials.title.like(search), group7_materials.author.like(search))).all()
-        return render_template('index.html', materials=results, pageTitle='Materials', legend='Search Results')
+        return render_template('materials.html', materials=results, pageTitle='Materials', legend='Search Results')
     else:
         return redirect('/')
 
@@ -105,7 +116,7 @@ def search_patrons():
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
         results = group7_patron.query.filter( or_(group7_patron.lastName.like(search), group7_patron.phoneNumber1, group7_patron.phoneNumber2, group7_patron.email.like(search))).all()
-        return render_template('index.html', patrons=results, pageTitle='Patrons', legend='Search Results')
+        return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
 
@@ -116,7 +127,7 @@ def add_material():
         material = group7_materials(materialClass=form.materialClass.data, callNumber=form.callNumber.data, title=form.title.data, author=form.author.data, publisher=form.publisher.data, copyright=form.copyright.data, ISBN=form.ISBN.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
         db.session.add(material)
         db.session.commit()
-        return redirect('/')
+        return redirect('/materials')
 
     return render_template('add_material.html', form=form, pageTitle='Add A New Material', legend="Add A New Material")
 
@@ -127,7 +138,7 @@ def add_patron():
         patron = group7_patron(firstName=form.firstName.data, lastName=lastName.data, birthdate=birthdate.data, address1=address1.data, address2=address2.data, city=city.data, state=state.data, zip=zip.data, phoneNumber1=phoneNumber1.data, phoneNumber2=phoneNumber2.data, email=email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
         db.session.add(patron)
         db.session.commit()
-        return redirect('/')
+        return redirect('/patrons')
 
     return render_template('add_patron.html', form=form, pageTitle='Add A New Patron', legend="Add A New Patron")
 
@@ -159,7 +170,7 @@ def update_material(materialId):
         material.dateAdded = form.dateAdded.data
         material.lastModified = datetime.datetime.now()
         db.session.commit()
-        return redirect('/')
+        return redirect('/materials')
 
     form.materialId.data = material.materialId
     form.materialClass.data = material.materialClass
@@ -194,7 +205,7 @@ def update_patron(patronId):
         patron.dateAdded = form.dateAdded.data
         patron.lastModified = datetime.datetime.now()
         db.session.commit()
-        return redirect('/')
+        return redirect('/patrons')
 
     form.patronId.data = patron.patronId
     form.firstName.data = patron.firstName
@@ -220,7 +231,7 @@ def delete_material(materialId):
         db.session.delete(material)
         db.session.commit()
         flash('Material was successfully deleted!')
-        return redirect("/")
+        return redirect("/materials")
     else: #if it's a GET request, send them to the home page
         return redirect("/")
 
@@ -231,7 +242,7 @@ def delete_patron(patronId):
         db.session.delete(patron)
         db.session.commit()
         flash('Material was successfully deleted!')
-        return redirect("/")
+        return redirect("/patrons")
     else: #if it's a GET request, send them to the home page
         return redirect("/")
 

@@ -1,88 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<p><a href="{{ url_for('add_material')}}"> Add a new material</a></p>
-<form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_materials">
-  <input type="submit" formaction="/searchmaterials" value="Search Materials">
-</form>
+<div class="jumbotron">
+  <h1>SLPL</h1>
+  <p class="lead">Public Library</p>
+  <p><a href="/About" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
 
-{% with messages = get_flashed_messages() %}
- {% if messages %}
- <div class="alert alert-warning alert-dismissible fade show" role="alert" id="flash">
-   {% for message in messages %}
-   <strong>Alert!</strong> {{ message }}
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-   </button>
-   {% endfor %}
-   {% endif %}
-   {% endwith %}
- </div>
 
-{% if materials %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Call Number</th>
-                <th>Title</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            {% for row in materials %}
-            <tr>
 
-                <td> {{ row.materialId }}</td>
-                <td> {{ row.callNumber }}</td>
-                <td> {{ row.title }}</td>
-
-                    <td>
-          <form action="{{ url_for('material', materialId=row.materialId) }}" method="POST">
-            <input type="submit" value="Details" class="btn btn-info" />
-          </form>
-        </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
-
-<p><a href="{{ url_for('add_patron')}}"> Add a new patron</a></p>
-<form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_patrons">
-  <input type="submit" formaction="/searchpatrons" value="Search Patrons">
-</form>
-
-{% if patrons %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last Name</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for row in patrons %}
-            <tr>
-
-                <td> {{ row.patronId }}</td>
-                <td> {{ row.firstName }}</td>
-                <td> {{ row.lastName }}</td>
-
-                    <td>
-          <form action="{{ url_for('patron', patronId=row.patronId) }}" method="POST">
-            <input type="submit" value="Details" class="btn btn-info" />
-          </form>
-        </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
 {% endblock %}
