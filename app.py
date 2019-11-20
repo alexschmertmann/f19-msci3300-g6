@@ -83,19 +83,17 @@ class PatronForm(FlaskForm):
 
 @app.route('/')
 def index():
-    all_materials = group7_materials.query.all()
-    all_patrons = group7_patron.query.all()
-    return render_template('index.html', materials=all_materials, patrons=all_patrons, pageTitle='South Liberty Public Library')
+    return render_template('index.html', pageTitle='South Liberty Public Library', legend='Home')
 
 @app.route('/materials')
 def materials():
     all_materials = group7_materials.query.all()
-    return render_template('materials.html', materials=all_materials, pageTitle='Materials')
+    return render_template('materials.html', materials=all_materials, pageTitle='Materials', legend='Materials')
 
 @app.route('/patrons')
 def patrons():
     all_patrons = group7_patron.query.all()
-    return render_template('patrons.html', patrons= all_patrons, pageTitle = 'Patrons')
+    return render_template('patrons.html', patrons= all_patrons, pageTitle = 'Patrons', legend='Patrons')
 
 
 @app.route('/searchmaterials', methods=['GET', 'POST'])
@@ -145,12 +143,12 @@ def add_patron():
 @app.route('/material/<int:materialId>', methods=['GET','POST'])
 def material(materialId):
     material = group7_materials.query.get_or_404(materialId)
-    return render_template('material.html', form=material, pageTitle='Material Details')
+    return render_template('material.html', form=material, pageTitle='Material Details', legend='Material Details')
 
 @app.route('/patron/<int:patronId>', methods=['GET','POST'])
 def patron(patronId):
     patron = group7_patron.query.get_or_404(patronId)
-    return render_template('patron.html', form=patron, pageTitle='Patron Details')
+    return render_template('patron.html', form=patron, pageTitle='Patron Details', legend='Patron Details')
 
 
 @app.route('/material/<int:materialId>/update', methods=['GET','POST'])

@@ -14,13 +14,13 @@
    {% endif %}
    {% endwith %}
  </div>
-
+ <div class="container-fluid">
 <p><a href="{{ url_for('add_patron')}}"> Add a new patron</a></p>
 <form method ="POST">
   <input type="text" autofocus="autofocus" name="search_patrons">
   <input type="submit" formaction="/searchpatrons" value="Search Patrons">
 </form>
-
+</div>
 {% if patrons %}
     <table>
         <thead>
