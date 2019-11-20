@@ -21,27 +21,37 @@
 </head>
 
   <body>
-      <h1> SLPL </h1>
-      <div class="navbar navbar-inverse navbar-fixed-top">
-         <div class="container">
-             <div class="navbar-header">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                 </button>
-                 <a class="navbar-brand" href="~/">SLPL</a>
-             </div>
-             <div class="navbar-collapse collapse">
-                 <ul class="nav navbar-nav">
-                     <li><a href="/">Home</a></li>
-                     <li><a href="/materials">Materials</a></li>
-                     <li><a href="/patrons">Patrons</a></li>
-                 </ul>
-             </div>
-         </div>
-     </div>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">SLPL</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">About <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/materials">Materials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/patrons">Patrons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Check Out <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Check In <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
       <hr>
+      <h3>{{ legend }}</h3>
    <div class="container body-content">
       {% block body %}
 
