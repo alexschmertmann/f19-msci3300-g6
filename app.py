@@ -68,12 +68,12 @@ class PatronForm(FlaskForm):
     patronId = IntegerField('Patron ID: ')
     firstName = StringField('First Name:', validators=[DataRequired()])
     lastName = StringField('Last Name: ', validators=[DataRequired()])
-    birthdate = DateField('Birthdate: ')
+    birthdate = DateField('Birthdate: ', validators=[DataRequired()])
     address1 = StringField('Address1: ')
     address2 = StringField('Address2: ')
-    city = StringField('City: ')
-    state = StringField('State: ')
-    zip = IntegerField('Zip: ')
+    city = StringField('City: ', validators=[DataRequired()])
+    state = StringField('State: ',validators=[DataRequired()])
+    zip = IntegerField('Zip: ', validators=[DataRequired()])
     phoneNumber1 = IntegerField('Phone Number 1: ')
     phoneNumber2 = IntegerField('Phone Number 2: ')
     email = StringField('Email: ')
@@ -136,7 +136,7 @@ def add_patron():
         patron = group7_patron(firstName=form.firstName.data, lastName=lastName.data, birthdate=birthdate.data, address1=address1.data, address2=address2.data, city=city.data, state=state.data, zip=zip.data, phoneNumber1=phoneNumber1.data, phoneNumber2=phoneNumber2.data, email=email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
         db.session.add(patron)
         db.session.commit()
-        return redirect('/patrons')
+        return redirect('/patron')
 
     return render_template('add_patron.html', form=form, pageTitle='Add A New Patron', legend="Add A New Patron")
 
@@ -229,9 +229,9 @@ def delete_material(materialId):
         db.session.delete(material)
         db.session.commit()
         flash('Material was successfully deleted!')
-        return redirect("/materials")
+        return redirect('/materials')
     else: #if it's a GET request, send them to the home page
-        return redirect("/")
+        return redirect('/materials')
 
 @app.route('/patron/<int:patronId>/delete', methods=['POST'])
 def delete_patron(patronId):
@@ -239,10 +239,10 @@ def delete_patron(patronId):
         patron = group7_patron.query.get_or_404(patronId)
         db.session.delete(patron)
         db.session.commit()
-        flash('Material was successfully deleted!')
-        return redirect("/patrons")
+        flash('Patron was successfully deleted!')
+        return redirect('/patrons')
     else: #if it's a GET request, send them to the home page
-        return redirect("/")
+        return redirect('/patrons')
 
 
 if __name__ == '__main__':
