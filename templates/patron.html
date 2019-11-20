@@ -9,34 +9,20 @@
 
     {{ form.csrf_token }}
 
-    {{ form.patronId.label }} {{ form.patronId }}
-    <br>
-    {{ form.firstName.label }} {{ form.firstName }}
-    <br>
-    {{ form.lastName.label }} {{ form.lastName }}
-    <br>
-    {{ form.birthdate.label }} {{ form.birthdate }}
-    <br>
-    {{ form.address1.label }} {{ form.address1 }}
-    <br>
-    {{ form.address2.label }} {{ form.address2 }}
-    <br>
-    {{ form.city.label }} {{ form.city }}
-    <br>
-    {{ form.state.label }} {{ form.state }}
-    <br>
-    {{ form.zip.label }} {{ form.zip }}
-    <br>
-    {{ form.phoneNumber1.label }} {{ form.phoneNumber1 }}
-    <br>
-    {{ form.phoneNumber2.label }} {{ form.phoneNumber2 }}
-    <br>
-    {{ form.email.label }} {{ form.email }}
-    <br>
-    {{ form.dateAdded.label }} {{ form.dateAdded }}
-    <br>
-    {{ form.lastModified.label }} {{ form.lastModified }}
-    <br>
+    {{ form.patronId.label }} {{ form.patronId }}<br>
+    {{ form.firstName.label }} {{ form.firstName }}<br>
+    {{ form.lastName.label }} {{ form.lastName }}<br>
+    {{ form.birthdate.label }} {{ form.birthdate }}<br>
+    {{ form.address1.label }} {{ form.address1 }}<br>
+    {{ form.address2.label }} {{ form.address2 }}<br>
+    {{ form.city.label }} {{ form.city }}<br>
+    {{ form.state.label }} {{ form.state }}<br>
+    {{ form.zip.label }} {{ form.zip }}<br>
+    {{ form.phoneNumber1.label }} {{ form.phoneNumber1 }}<br>
+    {{ form.phoneNumber2.label }} {{ form.phoneNumber2 }}<br>
+    {{ form.email.label }} {{ form.email }}<br>
+    {{ form.dateAdded.label }} {{ form.dateAdded }}<br>
+    {{ form.lastModified.label }} {{ form.lastModified }}<br>
 
 
     <input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update">

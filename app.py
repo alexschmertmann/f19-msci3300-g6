@@ -38,7 +38,7 @@ class group7_patron(db.Model):
     patronId = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(255))
     lastName = db.Column(db.String(255))
-    birthdate = db.Column(db.DateTime)
+    birthdate = db.Column(db.Date)
     address1 = db.Column(db.String(255))
     address2 = db.Column(db.String(255))
     city = db.Column(db.String(255))
@@ -133,10 +133,10 @@ def add_material():
 def add_patron():
     form = PatronForm()
     if form.validate_on_submit():
-        patron = group7_patron(firstName=form.firstName.data, lastName=lastName.data, birthdate=birthdate.data, address1=address1.data, address2=address2.data, city=city.data, state=state.data, zip=zip.data, phoneNumber1=phoneNumber1.data, phoneNumber2=phoneNumber2.data, email=email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
+        patron = group7_patron(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
         db.session.add(patron)
         db.session.commit()
-        return redirect('/patron')
+        return redirect('/patrons')
 
     return render_template('add_patron.html', form=form, pageTitle='Add A New Patron', legend="Add A New Patron")
 
@@ -187,7 +187,10 @@ def update_patron(patronId):
     patron = group7_patron.query.get_or_404(patronId)
     form = PatronForm()
 
-    if form.validate_on_submit():
+    #if form.validate_on_submit():
+    if request.method == 'POST': #using for debugging
+
+        print("insidevalidate")
         patron.patronId = form.patronId.data
         patron.firstName = form.firstName.data
         patron.lastName = form.lastName.data
