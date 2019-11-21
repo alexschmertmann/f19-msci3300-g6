@@ -8,27 +8,17 @@
 
 
     {{ form.csrf_token }}
-  
-    {{ form.materialId.label }} {{ form.materialId }}
-    <br>
-    {{ form.materialClass.label }} {{ form.materialClass }}
-    <br>
-    {{ form.callNumber.label }} {{ form.callNumber }}
-    <br>
-    {{ form.title.label }} {{ form.title }}
-    <br>
-    {{ form.author.label }} {{ form.author }}
-    <br>
-    {{ form.publisher.label }} {{ form.publisher }}
-    <br>
-    {{ form.copyright.label }} {{ form.copyright}}
-    <br>
-    {{ form.ISBN.label }} {{ form.ISBN }}
-    <br>
-    {{ form.dateAdded.label }} {{ form.dateAdded }}
-    <br>
-    {{ form.lastModified.label }} {{ form.lastModified }}
-    <br>
+
+    {{ form.materialId.label }} {{ form.materialId }}<br>
+    {{ form.materialClass.label }} {{ form.materialClass }}<br>
+    {{ form.callNumber.label }} {{ form.callNumber }}<br>
+    {{ form.title.label }} {{ form.title }}<br>
+    {{ form.author.label }} {{ form.author }}<br>
+    {{ form.publisher.label }} {{ form.publisher }}<br>
+    {{ form.copyright.label }} {{ form.copyright}}<br>
+    {{ form.ISBN.label }} {{ form.ISBN }}<br>
+    {{ form.dateAdded.label }} {{ form.dateAdded }}<br>
+    {{ form.lastModified.label }} {{ form.lastModified }}<br>
 
 
     <input type="submit" formaction="{{url_for('update_material', materialId=form.materialId)}}" value="Update">

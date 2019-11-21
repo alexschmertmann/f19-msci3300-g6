@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import render_template, redirect, request, flash, url_for
-#for windows
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DateField, SubmitField
 from wtforms.validators import DataRequired
@@ -34,11 +33,11 @@ class group7_materials(db.Model):
     def __repr__(self):
         return "id: {0} | material class: {1} | call number: {2} | title: {3} | author: {4} | publisher: {5} | copyright: {6} | ISBN: {7} | date added: {8} | date modified: {9}".format(self.materialId, self.materialClass, self.callNumber, self.title, self.author, self.publisher, self.copyright, self.ISBN, self.dateAdded, self.lastModified)
 
-class group7_patron(db.Model):
+class group7_patrons(db.Model):
     patronId = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(255))
     lastName = db.Column(db.String(255))
-    birthdate = db.Column(db.Date)
+    birthdate = db.Column(db.DateTime)
     address1 = db.Column(db.String(255))
     address2 = db.Column(db.String(255))
     city = db.Column(db.String(255))
@@ -50,30 +49,30 @@ class group7_patron(db.Model):
     dateAdded = db.Column(db.DateTime)
     lastModified = db.Column(db.DateTime)
     def __repr__(self):
-        return "id: {0} | first name: {1} | last name: {2} | birthdate: {3} | address1: {4} | address2: {5} | city: {6} | state: {7} | zip: {8} | phoneNumber1: {9} | phoneNumber2: {10} | email: {11} | dateAdded: {12} | lastModified: {13}".format(self.patronId, self.firstName, self.lastName, self.birthdate, self.address1, self.address2, self.city, self.state, self.zip, self.phoneNumber1, self.phoneNumber2, self.email, self.dateAdded, self.lastModified)
+        return "id: {0} | fName: {1} | lName: {2} | bdate: {3} | add1: {4} | add2: {5} | city: {6} | state: {7} | zip: {8}| | phone1: {9} | phone2: {10} | email: {10} | date added: {11} | date modified: {12}".format(self.patronId, self.firstName, self.lastName, self.birthdate, self.address1, self.address2, self.city, self.state, self.zip, self.phoneNumber1, self.phoneNumber2, self.email, self.dateAdded, self.lastModified)
 
 class MaterialForm(FlaskForm):
     materialId = IntegerField('Material ID: ')
-    materialClass = StringField('Material Class:', validators=[DataRequired()])
-    callNumber = StringField('Call Number:', validators=[DataRequired()])
-    title = StringField('Title:', validators=[DataRequired()])
-    author = StringField('Author:')
-    publisher = StringField('Publisher:', validators=[DataRequired()])
-    copyright = StringField('Copyright:')
-    ISBN = IntegerField('ISBN:', validators=[DataRequired()])
+    materialClass = StringField('Material Class: *', validators=[DataRequired()])
+    callNumber = StringField('Call Number: *', validators=[DataRequired()])
+    title = StringField('Title: *', validators=[DataRequired()])
+    author = StringField('Author: ')
+    publisher = StringField('Publisher: ', validators=[DataRequired()])
+    copyright = StringField('Copyright: ')
+    ISBN = IntegerField('ISBN: ', validators=[DataRequired()])
     dateAdded = DateField('Date Added: ')
     lastModified = DateField('Date Last Modified: ')
 
 class PatronForm(FlaskForm):
     patronId = IntegerField('Patron ID: ')
-    firstName = StringField('First Name:', validators=[DataRequired()])
-    lastName = StringField('Last Name: ', validators=[DataRequired()])
-    birthdate = DateField('Birthdate: ', validators=[DataRequired()])
+    firstName = StringField('First Name: *', validators=[DataRequired()])
+    lastName = StringField('Last Name: *', validators=[DataRequired()])
+    birthdate = DateField('Birthdate (YYYY-MM-DD): *', )
     address1 = StringField('Address1: ')
     address2 = StringField('Address2: ')
-    city = StringField('City: ', validators=[DataRequired()])
-    state = StringField('State: ',validators=[DataRequired()])
-    zip = IntegerField('Zip: ', validators=[DataRequired()])
+    city = StringField('City: ')
+    state = StringField('State: ')
+    zip = IntegerField('Zip: ')
     phoneNumber1 = IntegerField('Phone Number 1: ')
     phoneNumber2 = IntegerField('Phone Number 2: ')
     email = StringField('Email: ')
@@ -92,7 +91,7 @@ def materials():
 
 @app.route('/patrons')
 def patrons():
-    all_patrons = group7_patron.query.all()
+    all_patrons = group7_patrons.query.all()
     return render_template('patrons.html', patrons= all_patrons, pageTitle = 'Patrons', legend='Patrons')
 
 
@@ -113,7 +112,7 @@ def search_patrons():
         form = request.form
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
-        results = group7_patron.query.filter( or_(group7_patron.lastName.like(search), group7_patron.phoneNumber1, group7_patron.phoneNumber2, group7_patron.email.like(search))).all()
+        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1, group7_patrons.phoneNumber2, group7_patrons.email.like(search))).all()
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
@@ -132,8 +131,8 @@ def add_material():
 @app.route('/patron/new', methods=['GET', 'POST'])
 def add_patron():
     form = PatronForm()
-    if form.validate_on_submit():
-        patron = group7_patron(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
+    if request.method == 'POST':
+        patron = group7_patrons(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
         db.session.add(patron)
         db.session.commit()
         return redirect('/patrons')
@@ -147,7 +146,7 @@ def material(materialId):
 
 @app.route('/patron/<int:patronId>', methods=['GET','POST'])
 def patron(patronId):
-    patron = group7_patron.query.get_or_404(patronId)
+    patron = group7_patrons.query.get_or_404(patronId)
     return render_template('patron.html', form=patron, pageTitle='Patron Details', legend='Patron Details')
 
 
@@ -184,13 +183,10 @@ def update_material(materialId):
 
 @app.route('/patron/<int:patronId>/update', methods=['GET','POST'])
 def update_patron(patronId):
-    patron = group7_patron.query.get_or_404(patronId)
+    patron = group7_patrons.query.get_or_404(patronId)
     form = PatronForm()
-
-    #if form.validate_on_submit():
-    if request.method == 'POST': #using for debugging
-
-        print("insidevalidate")
+    if form.validate_on_submit():
+    #if request.method == 'POST':
         patron.patronId = form.patronId.data
         patron.firstName = form.firstName.data
         patron.lastName = form.lastName.data
@@ -239,7 +235,7 @@ def delete_material(materialId):
 @app.route('/patron/<int:patronId>/delete', methods=['POST'])
 def delete_patron(patronId):
     if request.method == 'POST': #if it's a POST request, delete the material from the database
-        patron = group7_patron.query.get_or_404(patronId)
+        patron = group7_patrons.query.get_or_404(patronId)
         db.session.delete(patron)
         db.session.commit()
         flash('Patron was successfully deleted!')
