@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+
+{% if form %}
+  <form method="POST", action=''>
+
+    {{ form.csrf_token }}
+
+    {{ form.materialId.label }} {{ form.materialId }}
+    <br>
+    {{ form.patronId.label }} {{ form.patronId }}
+    <br>
+    {{ form.dayRented.label }} {{ form.dayRented }}
+    <br>
+    {{ form.dueDate.label }} {{ form.dueDate }}
+    <br>
+
+
+
+    <input type="submit" formaction="{{url_for('update_circulations', checkoutId=form.checkoutId)}}" value="Update">
+    <input type="submit" formaction="{{url_for('check_in', materialId=form.materialId)}}" value="Check In">
+
+
+
+  </form>
+{% endif %}
+
+{% endblock %}

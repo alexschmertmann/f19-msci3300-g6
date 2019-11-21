@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
-
 {% block body %}
-<<<<<<< HEAD
 
-<p><a href="{{ url_for('add_material')}}"> Add a new material</a></p>
-=======
 {% with messages = get_flashed_messages() %}
  {% if messages %}
  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="flash">
@@ -20,34 +16,37 @@
  </div>
 
 <div class="container-fluid">
-<p><a href="{{ url_for('add_material')}}" class="btn"> Add a new material</a></p>
->>>>>>> Created circulation page and made it work
+<p><a href="{{ url_for('check_out')}}" class="btn"> Check out a new material</a></p>
 <form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_materials">
-  <input type="submit" formaction="/searchmaterials" value="Search Materials">
+  <input type="text" autofocus="autofocus" name="search_circulation">
+  <input type="submit" formaction="/searchcirculation" value="Search Circulation">
 </form>
 </div>
 
-{% if materials %}
+{% if circulations %}
     <table class="table table-striped table-hover table-sm text-center">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
+                <th>Checkout ID</th>
+                <th>Material ID</th>
+                <th>Patron ID</th>
+                <th>Day Rented</th>
+                <th>Due Date</th>
             </tr>
         </thead>
 
         <tbody>
-            {% for row in materials %}
+            {% for row in circulations %}
             <tr>
 
-                <td> {{ row.title }}</td>
-                <td> {{ row.author }}</td>
-                <td> {{ row.ISBN }}</td>
+                <td> {{ row.checkoutId }}</td>
+                <td> {{ row.materialId }}</td>
+                <td> {{ row.patronId }}</td>
+                <td> {{ row.dayRented }}</td>
+                <td> {{ row.dueDate }}</td>
 
-                    <td>
-          <form action="{{ url_for('material', materialId=row.materialId) }}" method="POST">
+        <td>
+          <form action="{{ url_for('circulations', checkoutId=row.checkoutId) }}" method="POST">
             <input type="submit" value="Details" class="btn btn-info" />
           </form>
         </td>
@@ -57,5 +56,4 @@
         </tbody>
     </table>
 {% endif %}
-
 {% endblock %}

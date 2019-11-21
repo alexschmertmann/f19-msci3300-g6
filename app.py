@@ -51,6 +51,22 @@ class group7_patrons(db.Model):
     def __repr__(self):
         return "id: {0} | fName: {1} | lName: {2} | bdate: {3} | add1: {4} | add2: {5} | city: {6} | state: {7} | zip: {8}| | phone1: {9} | phone2: {10} | email: {10} | date added: {11} | date modified: {12}".format(self.patronId, self.firstName, self.lastName, self.birthdate, self.address1, self.address2, self.city, self.state, self.zip, self.phoneNumber1, self.phoneNumber2, self.email, self.dateAdded, self.lastModified)
 
+class group7_circulation(db.Model):
+    checkoutId = db.Column(db.Integer, primary_key=True)
+    materialId = db.Column(db.Integer) # db.ForeignKey('group7_materials.materialId'))
+    patronId = db.Column(db.Integer) # db.ForeignKey('group7_patrons.patronId'))
+    dayRented = db.Column(db.DateTime)
+    dueDate = db.Column(db.DateTime)
+    def __repr__(self):
+        return "id: {0} | material id: {1} | patron id: {2} | day rented: {3} | due date: {4}".format(self.checkoutId, self.materialId, self.patronId, self.dayRented, self.dueDate)
+
+class CirculationForm(FlaskForm):
+    checkoutId = IntegerField('Circulation ID: ')
+    materialId = IntegerField('Material ID: ', validators=[DataRequired()])
+    patronId = IntegerField('Patron ID: ', validators=[DataRequired()])
+    dayRented = DateField('Day Rented: ')
+    dueDate = DateField('Due Date: ')
+
 class MaterialForm(FlaskForm):
     materialId = IntegerField('Material ID: ')
     materialClass = StringField('Material Class: *', validators=[DataRequired()])
@@ -112,7 +128,11 @@ def search_patrons():
         form = request.form
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
+<<<<<<< HEAD
         results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1.like(search), group7_patrons.phoneNumber2.like(search), group7_patrons.email.like(search))).all()
+=======
+        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1, group7_patrons.phoneNumber2, group7_patrons.email.like(search))).all()
+>>>>>>> Created circulation page and made it work
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
@@ -131,8 +151,13 @@ def add_material():
 @app.route('/patron/new', methods=['GET', 'POST'])
 def add_patron():
     form = PatronForm()
+<<<<<<< HEAD
     if request.method == 'POST':
         patron = group7_patrons(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
+=======
+    if form.validate_on_submit():
+        patron = group7_patrons(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=form.datetime.datetime.now(),lastModified=form.datetime.datetime.now())
+>>>>>>> Created circulation page and made it work
         db.session.add(patron)
         db.session.commit()
         return redirect('/patrons')
@@ -243,6 +268,53 @@ def delete_patron(patronId):
     else: #if it's a GET request, send them to the home page
         return redirect('/patrons')
 
+@app.route('/circulations')
+def circulations():
+    all_circulations = group7_circulation.query.all()
+    return render_template('circulations.html', circulations=all_circulations, pageTitle='Circulations', legend='Circulations')
+
+@app.route('/circulations/check_out', methods=['GET', 'POST'])
+def check_out():
+    form = CirculationForm()
+    if form.validate_on_submit():
+        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=form.dayRented.data, dueDate=form.dueDate.data)
+        db.session.add(checkouts)
+        db.session.commit()
+        return redirect('/circulations')
+
+    return render_template('check_out.html', form=form, pageTitle='Check out A New Material', legend="Check out A New Material")
+
+@app.route('/circulations/check_in', methods=['POST'])
+def check_in(materialId):
+    if request.method == 'POST':
+        checkins = group7_circulation.query.get_or_404(materialId)
+        db.session.delete(checkins)
+        db.session.commit()
+        flash('You material have been checked in successfully!')
+        return redirect("/circulations")
+    else: #if it's a GET request, send them to the home page
+        return redirect("/")
+
+@app.route('/circulations/update', methods=['GET','POST'])
+def update_circulations(checkoutId):
+    material = group7_materials.query.get_or_404(checkoutId)
+    form = CirculationForm()
+
+    if form.validate_on_submit():
+        circulation.checkoutId = form.checkoutId.data
+        circulation.materialId = form.materialId.data
+        circulation.patronId = form.patronId.data
+        circulation.dayRented = form.dayRented.data
+        circulation.dueDate = form.dueDate.data
+        db.session.commit()
+        return redirect('/circulations')
+
+    form.checkoutId.data = circulation.checkoutId
+    form.materialId.data = circulation.materialId
+    form.patronId.data = circulation.patronId
+    form.dayRented.data = circulation.dayRented
+    form.dueDate.data = circulation.dueDate
+    return render_template('update_circulation.html', form=form, pageTitle='Update Material',legend="Update A Material")
 
 if __name__ == '__main__':
     app.run(debug=True)
