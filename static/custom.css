@@ -30,3 +30,9 @@ body{
 .navbar-brand{
     color: #182628;
 }
+
+.back{
+  background-image: url('../static/images/Empty_book.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 150%;
+}
