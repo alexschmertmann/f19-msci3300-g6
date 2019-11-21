@@ -112,7 +112,7 @@ def search_patrons():
         form = request.form
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
-        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1, group7_patrons.phoneNumber2, group7_patrons.email.like(search))).all()
+        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1.like(search), group7_patrons.phoneNumber2.like(search), group7_patrons.email.like(search))).all()
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
