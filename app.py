@@ -128,11 +128,7 @@ def search_patrons():
         form = request.form
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
-<<<<<<< HEAD
         results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1.like(search), group7_patrons.phoneNumber2.like(search), group7_patrons.email.like(search))).all()
-=======
-        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1, group7_patrons.phoneNumber2, group7_patrons.email.like(search))).all()
->>>>>>> Created circulation page and made it work
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
@@ -151,13 +147,8 @@ def add_material():
 @app.route('/patron/new', methods=['GET', 'POST'])
 def add_patron():
     form = PatronForm()
-<<<<<<< HEAD
     if request.method == 'POST':
         patron = group7_patrons(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=datetime.datetime.now(),lastModified=datetime.datetime.now())
-=======
-    if form.validate_on_submit():
-        patron = group7_patrons(firstName=form.firstName.data, lastName=form.lastName.data, birthdate=form.birthdate.data, address1=form.address1.data, address2=form.address2.data, city=form.city.data, state=form.state.data, zip=form.zip.data, phoneNumber1=form.phoneNumber1.data, phoneNumber2=form.phoneNumber2.data, email=form.email.data, dateAdded=form.datetime.datetime.now(),lastModified=form.datetime.datetime.now())
->>>>>>> Created circulation page and made it work
         db.session.add(patron)
         db.session.commit()
         return redirect('/patrons')

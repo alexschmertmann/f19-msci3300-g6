@@ -1,27 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<<<<<<< HEAD
 
 <p><a href="{{ url_for('add_material')}}"> Add a new material</a></p>
-=======
-{% with messages = get_flashed_messages() %}
- {% if messages %}
- <div class="alert alert-warning alert-dismissible fade show" role="alert" id="flash">
-   {% for message in messages %}
-   <strong>Alert!</strong> {{ message }}
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-   </button>
-   {% endfor %}
-   {% endif %}
-   {% endwith %}
-
- </div>
-
-<div class="container-fluid">
-<p><a href="{{ url_for('add_material')}}" class="btn"> Add a new material</a></p>
->>>>>>> Created circulation page and made it work
 <form method ="POST">
   <input type="text" autofocus="autofocus" name="search_materials">
   <input type="submit" formaction="/searchmaterials" value="Search Materials">
