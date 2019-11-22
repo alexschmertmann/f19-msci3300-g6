@@ -53,18 +53,18 @@ class group7_patrons(db.Model):
 
 class group7_circulation(db.Model):
     checkoutId = db.Column(db.Integer, primary_key=True)
-    materialId = db.Column(db.Integer) # db.ForeignKey('group7_materials.materialId'))
-    patronId = db.Column(db.Integer) # db.ForeignKey('group7_patrons.patronId'))
+    materialId = db.Column(db.Integer, db.ForeignKey('group7_materials.materialId')) # db.ForeignKey('group7_materials.materialId'))
+    patronId = db.Column(db.Integer, db.ForeignKey('group7_patrons.patronId')) # db.ForeignKey('group7_patrons.patronId'))
     dayRented = db.Column(db.DateTime)
     dueDate = db.Column(db.DateTime)
     def __repr__(self):
         return "id: {0} | material id: {1} | patron id: {2} | day rented: {3} | due date: {4}".format(self.checkoutId, self.materialId, self.patronId, self.dayRented, self.dueDate)
 
-class CirculationForm(FlaskForm):
+class CheckoutForm(FlaskForm):
     checkoutId = IntegerField('Circulation ID: ')
     materialId = IntegerField('Material ID: ', validators=[DataRequired()])
     patronId = IntegerField('Patron ID: ', validators=[DataRequired()])
-    dayRented = DateField('Day Rented: ')
+    dayRented = DateField('Date: ')
     dueDate = DateField('Due Date: ')
 
 class MaterialForm(FlaskForm):
@@ -266,46 +266,25 @@ def circulations():
 
 @app.route('/circulations/check_out', methods=['GET', 'POST'])
 def check_out():
-    form = CirculationForm()
+    form = CheckoutForm()
     if form.validate_on_submit():
-        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=form.dayRented.data, dueDate=form.dueDate.data)
+        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=datetime.datetime.now(), dueDate=datetime.datetime.now()+14)
         db.session.add(checkouts)
         db.session.commit()
         return redirect('/circulations')
 
     return render_template('check_out.html', form=form, pageTitle='Check out A New Material', legend="Check out A New Material")
 
-@app.route('/circulations/check_in', methods=['POST'])
-def check_in(materialId):
+@app.route('/circulations/<int:checkoutId>/checkin', methods=['POST'])
+def check_in(checkoutId):
     if request.method == 'POST':
-        checkins = group7_circulation.query.get_or_404(materialId)
+        checkins = group7_circulation.query.get_or_404(checkoutId)
         db.session.delete(checkins)
         db.session.commit()
-        flash('You material have been checked in successfully!')
         return redirect("/circulations")
     else: #if it's a GET request, send them to the home page
         return redirect("/")
 
-@app.route('/circulations/update', methods=['GET','POST'])
-def update_circulations(checkoutId):
-    material = group7_materials.query.get_or_404(checkoutId)
-    form = CirculationForm()
-
-    if form.validate_on_submit():
-        circulation.checkoutId = form.checkoutId.data
-        circulation.materialId = form.materialId.data
-        circulation.patronId = form.patronId.data
-        circulation.dayRented = form.dayRented.data
-        circulation.dueDate = form.dueDate.data
-        db.session.commit()
-        return redirect('/circulations')
-
-    form.checkoutId.data = circulation.checkoutId
-    form.materialId.data = circulation.materialId
-    form.patronId.data = circulation.patronId
-    form.dayRented.data = circulation.dayRented
-    form.dueDate.data = circulation.dueDate
-    return render_template('update_circulation.html', form=form, pageTitle='Update Material',legend="Update A Material")
 
 @app.route("/about")
 def about():
