@@ -96,6 +96,11 @@ class PatronForm(FlaskForm):
     dateAdded = DateField('Date Added: ')
     lastModified = DateField('Date Last Modified: ')
 
+@app.errorhandler(500)
+def internal_server_error(error):
+    app.logger.error('Server Error: %s', (error))
+    return render_template('index.html'), 500
+
 
 @app.route('/')
 def index():
@@ -133,6 +138,18 @@ def search_patrons():
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
+
+@app.route('/searchcirculations', methods=['GET', 'POST'])
+def search_circulation():
+    if request.method =='POST':
+        form = request.form
+        search_value = form['search_circulation']
+        search = "%{0}%".format(search_value)
+        results = group7_circulation.query.filter( or_(group7_circulation.materialId.like(search), group7_circulation.patronId.like(search))).all()
+        return render_template('circulations.html', circulations=results, pageTitle='Checked Out', legend='Search Results')
+    else:
+        return redirect('/')
+
 
 @app.route('/material/new', methods=['GET', 'POST'])
 def add_material():
@@ -269,10 +286,13 @@ def circulations():
 def check_out():
     form = CheckoutForm()
     if form.validate_on_submit():
-        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=date.today(), dueDate=(date.today() + timedelta(14) ))
-        db.session.add(checkouts)
-        db.session.commit()
-        return redirect('/circulations')
+        if form.materialId in group7_circulation:
+            return redirect('/circulations')
+        else:
+            checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=date.today(), dueDate=(date.today() + timedelta(14) ))
+            db.session.add(checkouts)
+            db.session.commit()
+            return redirect('/circulations')
 
     return render_template('check_out.html', form=form, pageTitle='Check out A New Material', legend="Check out A New Material")
 
