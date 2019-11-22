@@ -8,6 +8,7 @@ from sqlalchemy import or_
 import pymysql
 import secrets
 import datetime
+from datetime import date, timedelta
 
 
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
@@ -268,7 +269,7 @@ def circulations():
 def check_out():
     form = CheckoutForm()
     if form.validate_on_submit():
-        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=datetime.datetime.now(), dueDate=datetime.datetime.now()+14)
+        checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=date.today(), dueDate=(date.today() + timedelta(14) ))
         db.session.add(checkouts)
         db.session.commit()
         return redirect('/circulations')
