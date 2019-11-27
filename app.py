@@ -282,6 +282,16 @@ def circulations():
     all_circulations = group7_circulation.query.all()
     return render_template('circulations.html', circulations=all_circulations, pageTitle='Circulations', legend='Circulations')
 
+@app.route('/circulations/overdue')
+def circulationsoverdue():
+    overdue_circulations = group7_circulation.query.filter(group7_circulation.dueDate<date.today())
+    return render_template('circulationsoverdue.html', circulations=overdue_circulations, pageTitle='Overdue Materials', legend='Overdue Materials')
+
+@app.route('/circulations/duetoday')
+def circulationsduetoday():
+    duetoday_circulations = group7_circulation.query.filter(group7_circulation.dueDate==date.today())
+    return render_template('circulationsduetoday.html', circulations=duetoday_circulations, pageTitle='Materials Due Today', legend='Materials Due Today')
+
 @app.route('/circulations/check_out', methods=['GET', 'POST'])
 def check_out():
     form = CheckoutForm()
