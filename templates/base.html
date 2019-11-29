@@ -19,46 +19,50 @@
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'custom.css') }}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-  <body>
-   <nav class="navbar navbar-expand-lg">
-         <img src="../static/images/FeedYourMind.png" width="50" height="50" alt="South Liberty Public Library">
-      <a class="navbar-brand" href="/"> South Liberty Public Library</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<body>
+  <nav class= "navbar navbar-expand-lg" style="background-color:#65CCB8">
+        <img src="../static/images/FeedYourMind.png" height="50" alt="South Liberty Public Library">
+        <a href="/" style="color:#F2F2F2; align:right"> <h3>South Liberty Public Library</h3></a>
+       <div class = "topnav-right" style = "float:right">
+       <a href="https://facebook.com" class="fa fa-facebook" style="color:#182628"></a>
+       <a href="https://twitter.com" class="fa fa-twitter"style="color:#182628"></a>
+       <a href="https://google.com" class="fa fa-google"style="color:#182628"></a>
+       <a href="https://youtube.com" class="fa fa-youtube"style="color:#182628"></a>
+       <form method ="POST">
+        <input type="text" autofocus="autofocus" name="search_materials" placeholder="Search catalog.." >
+        <button type="submit" formaction="/searchmaterials" ><i class="fa fa-search"></i></button>
+       </form>
+     </div>
+   </nav>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/materials">Materials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/patrons">Patrons</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/circulations"> Circulation </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/circulations/overdue"> Overdue Materials </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/circulations/duetoday"> Materials Due Today </a>
-          </li>
 
-        </ul>
-      </div>
-    </nav>
-      <hr>
-      <h3 class="container-fluid">{{ legend }}</h3>
-   <div class="container body-content">
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/materials">Catalog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/patrons">Accounts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/circulations"> Check Outs </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+    <hr>
+    <h3 class="container-fluid">{{ legend }}</h3>
+ <div class="container body-content">
       {% block body %}
 
       {% endblock %}

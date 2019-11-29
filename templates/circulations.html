@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
-
-
-
+<h2> Checked Out Materials</h2>
 <div class="container-fluid">
-<p><a href="{{ url_for('check_out')}}" class="btn"> Check out a new material</a></p>
+<p><a href="{{ url_for('check_out')}}" class="btn btn-info" style="background-color: #3B945E"> Check Out</a>
+
+<a href="/circulations/overdue" class="btn btn-danger"> Overdue Materials</a>
+<a href="/circulations/duetoday" class="btn btn-danger"> Due Today</a>
+</p>
+
 <form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_circulation">
-  <input type="submit" formaction="/searchcirculations" value="Search Checked Materials">
+  <input type="text" autofocus="autofocus" name="search_circulation" placeholder="Search..">
+  <button type="submit" formaction="/searchcirculations" ><i class="fa fa-search"></i></button>
 </form>
 </div>
+
 
 {% if circulations %}
     <table class="table table-striped table-hover table-sm text-center">
@@ -20,7 +24,6 @@
                 <th>Patron ID</th>
                 <th>Day Rented</th>
                 <th>Due Date</th>
-                <th>   </th>
             </tr>
         </thead>
 
@@ -34,7 +37,7 @@
                 <td> {{ row.dayRented }}</td>
                 <td> {{ row.dueDate }}</td>
                 <td> <form action="{{ url_for('check_in', checkoutId=row.checkoutId) }}" method="POST">
-                  <input type="submit" value="Check In" class="btn btn-info" />
+                  <input type="submit" value="Check In" class="btn btn-info" style="background-color: #65CCB8" />
                 </form>
               </td>
 

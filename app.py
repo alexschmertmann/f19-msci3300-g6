@@ -68,6 +68,7 @@ class CheckoutForm(FlaskForm):
     dayRented = DateField('Date: ')
     dueDate = DateField('Due Date: ')
 
+
 class MaterialForm(FlaskForm):
     materialId = IntegerField('Material ID: ')
     materialClass = StringField('Material Class: *', validators=[DataRequired()])
@@ -105,6 +106,10 @@ def internal_server_error(error):
 @app.route('/')
 def index():
     return render_template('index.html', pageTitle='South Liberty Public Library', legend='Home')
+
+@app.route('/about')
+def about():
+    return render_template('about.html', pageTitle='About')
 
 @app.route('/materials')
 def materials():
@@ -176,7 +181,7 @@ def add_patron():
 @app.route('/material/<int:materialId>', methods=['GET','POST'])
 def material(materialId):
     material = group7_materials.query.get_or_404(materialId)
-    return render_template('material.html', form=material, pageTitle='Material Details', legend='Material Details')
+    return render_template('material.html', form=material, pageTitle='Material Detail', legend='Material Detail')
 
 @app.route('/patron/<int:patronId>', methods=['GET','POST'])
 def patron(patronId):
@@ -280,7 +285,7 @@ def delete_patron(patronId):
 @app.route('/circulations')
 def circulations():
     all_circulations = group7_circulation.query.all()
-    return render_template('circulations.html', circulations=all_circulations, pageTitle='Circulations', legend='Circulations')
+    return render_template('circulations.html', circulations=all_circulations, pageTitle='Checked Out Materials',)
 
 @app.route('/circulations/overdue')
 def circulationsoverdue():
@@ -296,15 +301,14 @@ def circulationsduetoday():
 def check_out():
     form = CheckoutForm()
     if form.validate_on_submit():
-        if form.materialId in group7_circulation:
-            return redirect('/circulations')
-        else:
             checkouts = group7_circulation(checkoutId=form.checkoutId.data, materialId=form.materialId.data, patronId=form.patronId.data, dayRented=date.today(), dueDate=(date.today() + timedelta(14) ))
             db.session.add(checkouts)
             db.session.commit()
             return redirect('/circulations')
 
     return render_template('check_out.html', form=form, pageTitle='Check out A New Material', legend="Check out A New Material")
+
+
 
 @app.route('/circulations/<int:checkoutId>/checkin', methods=['POST'])
 def check_in(checkoutId):
@@ -315,11 +319,6 @@ def check_in(checkoutId):
         return redirect("/circulations")
     else: #if it's a GET request, send them to the home page
         return redirect("/")
-
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

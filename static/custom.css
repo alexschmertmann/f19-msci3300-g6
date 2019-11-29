@@ -1,5 +1,10 @@
 body{
-  background-color: white;
+  font-family: 'Cardo', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: 'Oswald', sans-serif;
+ text-transform: uppercase;
 }
 
 .jumbotron {
@@ -13,26 +18,55 @@ body{
     background-size: 100% 100%;
 }
 
-.btn{
+.btn-primary{
     background-color: #65CCB8;
     color: #F2F2F2;
     border-color: #3B945E;
 }
 
+.btn-secondary{
+    background-color: #F2F2F2;
+    color: #F2F2F2;
+    border-color: #3B945E;
+}
+
+
 .navbar-expand-lg{
+    background-color: #65CCB8;
+    color: #F2F2F2;
+}
+
+.navbar-expand-sm{
     background-color: #57BA98;
+    color: #F2F2F2;
 }
 
 .nav-link{
     color: #182628;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
 }
 
 .navbar-brand{
     color: #182628;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
 }
 
-.back{
-  background-image: url('../static/images/Empty_book.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 150%;
+.navbar-nav a{
+  color: #182628;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+.navbar-default .navbar-fnt {
+    color: #FFFFFF;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+.navbar-light {
+color: #182628;}
+
+.btn-info {
+  color: #3B945E
 }

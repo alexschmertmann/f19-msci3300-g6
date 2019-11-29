@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-<p><a href="{{ url_for('add_material')}}"> Add a new material</a></p>
+<div>
+<p><a href="{{ url_for('add_material')}}" class = "btn btn-info" style="background-color: #3B945E" > Add To Catalog</a></p>
 <form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_materials">
-  <input type="submit" formaction="/searchmaterials" value="Search Materials">
+  <input type="text" autofocus="autofocus" name="search_materials" placeholder="Search catalog..">
+  <button type="submit" formaction="/searchmaterials" ><i class="fa fa-search"></i></button>
 </form>
 </div>
 
@@ -29,7 +29,7 @@
 
                     <td>
           <form action="{{ url_for('material', materialId=row.materialId) }}" method="POST">
-            <input type="submit" value="Details" class="btn btn-info" />
+            <input type="submit" value="Details" class="btn btn-info" style="background-color: #65CCB8" />
           </form>
         </td>
 
