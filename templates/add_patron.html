@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
+<div class="container-fluid">
 
   <h3>{{ legend }}</h3>
 
-   </div>
 
 
 
@@ -13,19 +12,55 @@
 
     {{ form.csrf_token }}
 
-    {{ form.firstName.label }} {{ form.firstName }} <br>
-    {{ form.lastName.label }} {{ form.lastName }} <br>
-    {{ form.birthdate.label }} {{ form.birthdate }} <br>
-    {{ form.address1.label }} {{ form.address1 }} <br>
-    {{ form.address2.label }} {{ form.address2 }} <br>
-    {{ form.city.label }} {{ form.city }} <br>
-    {{ form.state.label }} {{ form.state }} <br>
-    {{ form.zip.label }} {{ form.zip }} <br>
-    {{ form.phoneNumber1.label }} {{ form.phoneNumber1 }} <br>
-    {{ form.phoneNumber2.label }} {{ form.phoneNumber2 }} <br>
-    {{ form.email.label }} {{ form.email }} <br>
+    <table>
+      <tr>
+        <td>{{ form.firstName.label }}</td>
+        <td>{{ form.firstName }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.lastName.label }}</td>
+        <td> {{ form.lastName }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.birthdate.label }}</td>
+        <td>{{ form.birthdate }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.address1.label }}</td>
+        <td>{{ form.address1 }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.address2.label }}</td>
+        <td>{{ form.address2 }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.city.label }}</td>
+        <td>{{ form.city }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.state.label }}</td>
+        <td>{{ form.state }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.zip.label }}</td>
+        <td>{{ form.zip }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.phoneNumber1.label }}</td>
+        <td>{{ form.phoneNumber1 }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.phoneNumber2.label }}</td>
+        <td>{{ form.phoneNumber2 }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.email.label }}</td>
+        <td>{{ form.email }}</td>
+      </tr>
+    </table>
 
-    <input type="submit" value="Save" style="background-color: #3B945E; color:#F2F2F2" >
+
+    <input type="submit" value="Save" class="btn btn-info">
 
   </form>
 

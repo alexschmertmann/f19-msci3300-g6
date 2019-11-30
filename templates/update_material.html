@@ -1,28 +1,57 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
-  <p><a href="{{ url_for('index')}}"> Home </a></p>
+<div class="container-fluid">
 
   <h3>{{ legend }}</h3>
 
   <form method="POST" action="">
 
     {{ form.csrf_token }}
+    <table>
+      <tr>
+        <td>{{ form.materialId.label }}</td>
+        <td>{{ form.materialId(size=20, readonly=true) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.materialClass.label }}</td>
+        <td>{{ form.materialClass(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.callNumber.label }}</td>
+        <td>{{ form.callNumber(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.title.label }} </td>
+        <td> {{ form.title(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.author.label }}</td>
+        <td> {{ form.author(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.publisher.label }}</td>
+        <td>{{ form.publisher(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.copyright.label }}</td>
+        <td>{{ form.copyright(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.ISBN.label }}</td>
+        <td>{{ form.ISBN(size=20) }}</td>
+      </tr>
+      <tr>
+        <td> {{ form.dateAdded.label }}</td>
+        <td>{{ form.dateAdded(size=20, readonly=true) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.lastModified.label }}</td>
+        <td>{{ form.lastModified(size=20, readonly=true) }}</td>
+      </tr>
+    </table>
 
 
-    {{ form.materialId.label }}     {{ form.materialId(size=20, readonly=true) }} <br>
-    {{ form.materialClass.label }}  {{ form.materialClass(size=20) }} <br>
-    {{ form.callNumber.label }}     {{ form.callNumber(size=20) }}<br>
-    {{ form.title.label }}          {{ form.title(size=20) }}<br>
-    {{ form.author.label }}         {{ form.author(size=20) }}<br>
-    {{ form.publisher.label }}      {{ form.publisher(size=20) }}<br>
-    {{ form.copyright.label }}      {{ form.copyright(size=20) }}<br>
-    {{ form.ISBN.label }}           {{ form.ISBN(size=20) }} <br>
-    {{ form.dateAdded.label }}      {{ form.dateAdded(size=20, readonly=true) }} <br>
-    {{ form.lastModified.label }}   {{ form.lastModified(size=20, readonly=true) }} <br>
-
-
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" class="btn btn-info">
 
   </form>
 

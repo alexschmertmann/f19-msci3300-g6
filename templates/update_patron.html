@@ -1,32 +1,74 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
-  <p><a href="{{ url_for('index')}}"> Home </a></p>
+<div class="container-fluid">
 
   <h3>{{ legend }}</h3>
 
   <form method="POST" action="">
 
     {{ form.csrf_token }}
+    <table>
+      <tr>
+        <td>{{ form.patronId.label }}</td>
+        <td> {{ form.patronId(size=20, readonly=true) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.firstName.label }}</td>
+        <td>{{ form.firstName(size=20, ) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.lastName.label }}</td>
+        <td>{{ form.lastName(size=20, ) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.birthdate.label }}</td>
+        <td>{{ form.birthdate(size=20, ) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.address1.label }}</td>
+        <td> {{ form.address1(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.address2.label }} </td>
+        <td>{{ form.address2(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.city.label }}</td>
+        <td>{{ form.city(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.state.label }}</td>
+        <td>{{ form.state(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.zip.label }}</td>
+        <td>{{ form.zip(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.phoneNumber1.label }} </td>
+        <td>{{ form.phoneNumber1(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.phoneNumber2.label }} </td>
+        <td>{{ form.phoneNumber2(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.email.label }}</td>
+        <td>{{ form.email(size=20) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.dateAdded.label }}</td>
+        <td>{{ form.dateAdded(size=20, readonly=true) }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.lastModified.label }}</td>
+        <td>{{ form.lastModified(size=20, readonly=true) }}</td>
+      </tr>
+    </table>
 
 
-    {{ form.patronId.label }}     {{ form.patronId(size=20, readonly=true) }} <br>
-    {{ form.firstName.label }}     {{ form.firstName(size=20, ) }} <br>
-    {{ form.lastName.label }}    {{ form.lastName(size=20, ) }}<br>
-    {{ form.birthdate.label }}       {{ form.birthdate(size=20, ) }}<br>
-    {{ form.address1.label }}         {{ form.address1(size=20) }}<br>
-    {{ form.address2.label }}         {{ form.address2(size=20) }}<br>
-    {{ form.city.label }}      {{ form.city(size=20) }}<br>
-    {{ form.state.label }}      {{ form.state(size=20) }}<br>
-    {{ form.zip.label }}           {{ form.zip(size=20) }} <br>
-    {{ form.phoneNumber1.label }}           {{ form.phoneNumber1(size=20) }} <br>
-    {{ form.phoneNumber2.label }}           {{ form.phoneNumber2(size=20) }} <br>
-    {{ form.email.label }}           {{ form.email(size=20) }} <br>
-    {{ form.dateAdded.label }}      {{ form.dateAdded(size=20, readonly=true) }} <br>
-    {{ form.lastModified.label }}   {{ form.lastModified(size=20, readonly=true) }} <br>
 
-
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" class="btn btn-info">
 
   </form>
 

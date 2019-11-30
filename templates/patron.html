@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 {% block body %}
 
+<div class="container-fluid">
+
+  {% if form %}
+    <form method="POST", action=''>
 
 
-{% if form %}
-  <form method="POST", action=''>
+      {{ form.csrf_token }}
+
+      <b>ID : </b> {{ form.patronId }}<br>
+      <b>First Name : </b> {{ form.firstName }}<br>
+      <b>Last Name : </b> {{ form.lastName }}<br>
+      <b>Birthdate : </b> {{ form.birthdate }}<br>
+      <b>Street Address 1 : </b> {{ form.address1 }}<br>
+      <b>Street Addess 2: </b> {{ form.address2 }}<br>
+      <b>City : </b> {{ form.city }}<br>
+      <b>State : </b> {{ form.state }}<br>
+      <b>Zip Code : </b> {{ form.zip }}<br>
+      <b>Phone Number : </b> {{ form.phoneNumber1 }}<br>
+      <b>Phone Number : </b> {{ form.phoneNumber2 }}<br>
+      <b>Email : </b> {{ form.email }}<br>
+      <b>Date Added : </b> {{ form.dateAdded }}<br>
+      <b>Last Modified : </b> {{ form.lastModified }}<br>
 
 
-    {{ form.csrf_token }}
-
-    <b>ID : </b> {{ form.patronId }}<br>
-    <b>First Name : </b> {{ form.firstName }}<br>
-    <b>Last Name : </b> {{ form.lastName }}<br>
-    <b>Birthdate : </b> {{ form.birthdate }}<br>
-    <b>Street Address 1 : </b> {{ form.address1 }}<br>
-    <b>Street Addess 2: </b> {{ form.address2 }}<br>
-    <b>City : </b> {{ form.city }}<br>
-    <b>State : </b> {{ form.state }}<br>
-    <b>Zip Code : </b> {{ form.zip }}<br>
-    <b>Phone Number : </b> {{ form.phoneNumber1 }}<br>
-    <b>Phone Number : </b> {{ form.phoneNumber2 }}<br>
-    <b>Email : </b> {{ form.email }}<br>
-    <b>Date Added : </b> {{ form.dateAdded }}<br>
-    <b>Last Modified : </b> {{ form.lastModified }}<br>
-
-
-    <input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update">
-    <input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete">
+      <input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update" class="btn btn-info">
+      <input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete" class="btn btn-info">
 
 
 
-  </form>
-{% endif %}
+    </form>
+  {% endif %}
 </div>
 {% endblock %}

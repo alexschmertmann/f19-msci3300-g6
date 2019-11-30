@@ -2,32 +2,32 @@
 {% block body %}
 
 
-
-{% if form %}
-  <form method="POST", action=''>
-    <table class="table table-striped table-hover table-sm text-center">
-
-
-    {{ form.csrf_token }}
-
-    <b>Material ID :</b> {{ form.materialId }}<br>
-    <b>Class :</b> {{ form.materialClass }}<br>
-    <b>Call Number :</b> {{ form.callNumber }}<br>
-    <b>Title :</b> {{ form.title }}<br>
-    <b>Author :</b> {{ form.author }}<br>
-    <b>Publisher :</b> {{ form.publisher }}<br>
-    <b>Copyright :</b> {{ form.copyright}}<br>
-    <b>ISBN :</b> {{ form.ISBN }}<br>
-    <b>Date Added :</b> {{ form.dateAdded }}<br>
-    <b>Last Modified :</b> {{ form.lastModified }}<br>
+<div class="container-fluid">
+  {% if form %}
+    <form method="POST", action=''>
+      <table class="table table-striped table-hover table-sm text-center">
 
 
-    <input type="submit" formaction="{{url_for('update_material', materialId=form.materialId)}}" value="Update">
-    <input type="submit" formaction="{{url_for('delete_material', materialId=form.materialId)}}" value="Delete">
+      {{ form.csrf_token }}
 
-    </table>
+      <b>Material ID :</b> {{ form.materialId }}<br>
+      <b>Class :</b> {{ form.materialClass }}<br>
+      <b>Call Number :</b> {{ form.callNumber }}<br>
+      <b>Title :</b> {{ form.title }}<br>
+      <b>Author :</b> {{ form.author }}<br>
+      <b>Publisher :</b> {{ form.publisher }}<br>
+      <b>Copyright :</b> {{ form.copyright}}<br>
+      <b>ISBN :</b> {{ form.ISBN }}<br>
+      <b>Date Added :</b> {{ form.dateAdded }}<br>
+      <b>Last Modified :</b> {{ form.lastModified }}<br>
 
-  </form>
-{% endif %}
+
+      <input type="submit" formaction="{{url_for('update_material', materialId=form.materialId)}}" value="Update" class="btn btn-info">
+      <input type="submit" formaction="{{url_for('delete_material', materialId=form.materialId)}}" value="Delete" class="btn btn-info">
+
+      </table>
+
+    </form>
+  {% endif %}
 </div>
 {% endblock %}
