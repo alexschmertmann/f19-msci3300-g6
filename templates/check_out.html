@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
+<div class="container-fluid">
 
   <h3>{{ legend }}</h3>
 
-   </div>
+   
 
 
 
@@ -15,9 +15,9 @@
     {{ form.patronId.label }} {{ form.patronId }}<br>
 
 
-    <input type="submit" value="Check Out" class="btn btn-info">
+    <input type="submit" value="Check Out" class="btn btn-info" style="background-color: #3B945E; color:#F2F2F2">
 
   </form>
-
+</div>
 
 {% endblock %}

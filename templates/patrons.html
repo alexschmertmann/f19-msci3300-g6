@@ -2,7 +2,7 @@
 
 {% block body %}
 <div>
-<p><a href="{{ url_for('add_patron')}}" class = "btn btn-info"> Add Account</a></p>
+<p><a href="{{ url_for('add_patron')}}" class = "btn btn-info" style="background-color: #3B945E; color: #F2F2F2 "> Add Account</a></p>
 <form method ="POST">
   <input type="text" autofocus="autofocus" name="search_patrons" placeholder="Search patrons..">
   <button type="submit" formaction="/searchpatrons" ><i class="fa fa-search"></i></button>
@@ -28,7 +28,7 @@
 
                     <td>
           <form action="{{ url_for('patron', patronId=row.patronId) }}" method="POST">
-            <input type="submit" value="Details" class="btn btn-info" />
+            <input type="submit" value="Details" class="btn btn-info" style="background-color: #65CCB8; color: #F2F2F2"/>
           </form>
         </td>
 
