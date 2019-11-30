@@ -2,7 +2,7 @@
 {% block body %}
 <h2> Checked Out Materials</h2>
 <div class="container-fluid">
-<p><a href="{{ url_for('check_out')}}" class="btn btn-info" style="background-color: #3B945E"> Check Out</a>
+<p><a href="{{ url_for('check_out')}}" class="btn btn-info" style="background-color: #3B945E; color: #F2F2F2"> Check Out</a>
 
 <a href="/circulations/overdue" class="btn btn-danger"> Overdue Materials</a>
 <a href="/circulations/duetoday" class="btn btn-danger"> Due Today</a>
@@ -37,7 +37,7 @@
                 <td> {{ row.dayRented }}</td>
                 <td> {{ row.dueDate }}</td>
                 <td> <form action="{{ url_for('check_in', checkoutId=row.checkoutId) }}" method="POST">
-                  <input type="submit" value="Check In" class="btn btn-info" style="background-color: #65CCB8" />
+                  <input type="submit" value="Check In" class="btn btn-info" style="background-color: #65CCB8;color: #F2F2F2" />
                 </form>
               </td>
 
