@@ -10,7 +10,7 @@
 </div>
 
 {% if materials %}
-    <table class="table table-striped table-hover table-sm text-center">
+    <table class="table table-striped table-hover table-sm text-center" id="totalMaterials">
         <thead>
             <tr>
                 <th>Title</th>
@@ -38,5 +38,10 @@
         </tbody>
     </table>
 {% endif %}
+<p id="demo"></p>
 
+<script>
+  var x = document.getElementById("totalMaterials").rows.length;
+  document.getElementById("demo").innerHTML = "Total Materials: " + (x-1);
+</script>
 {% endblock %}

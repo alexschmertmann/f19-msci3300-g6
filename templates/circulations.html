@@ -16,7 +16,7 @@
 
 
 {% if circulations %}
-    <table class="table table-striped table-hover table-sm text-center">
+    <table class="table table-striped table-hover table-sm text-center" id="MaterialsRented">
         <thead>
             <tr>
                 <th>Checkout ID</th>
@@ -46,4 +46,10 @@
         </tbody>
     </table>
 {% endif %}
+<p id="demo"></p>
+
+<script>
+  var x = document.getElementById("MaterialsRented").rows.length;
+  document.getElementById("demo").innerHTML = "Materials Rented: " + (x-1);
+</script>
 {% endblock %}
