@@ -71,3 +71,9 @@ color: #182628;}
 .btn-info {
   color: #182628;
 }
+
+.btn-primary:hover{
+    background-color: #57BA98;
+    color: black;
+    border-color: #3B945E;
+}

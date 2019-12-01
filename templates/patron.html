@@ -8,26 +8,71 @@
 
 
       {{ form.csrf_token }}
+    <table class="table table-striped table-hover table-sm text-center">
+      <tr>
+          <td>ID:</td>
+          <td>{{ form.patronId }}</td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td>{{ form.firstName }}</td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td>{{ form.lastName }}</td>
+        </tr>
+        <tr>
+          <td>Birthdate:</td>
+          <td>{{ form.birthdate }}</td>
+        </tr>
+        <tr>
+          <td>Address 1:</td>
+          <td>{{ form.address1 }}</td>
+        </tr>
+        <tr>
+          <td>Address 2:</td>
+          <td>{{ form.address2 }}</td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td>{{ form.city }}</td>
+        </tr>
+        <tr>
+          <td>State:</td>
+          <td>{{ form.state }}</td>
+        </tr>
+        <tr>
+          <td>Zip:</td>
+          <td>{{ form.zip }}</td>
+        </tr>
+        <tr>
+          <td>Phone Number 1:</td>
+          <td>{{ form.phoneNumber1 }}</td>
+        </tr>
+        <tr>
+          <td>Phone Number 2:</td>
+          <td>{{ form.phoneNumber2 }}</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+          <td>Date Added:</td>
+          <td>{{ form.dateAdded }}</td>
+        </tr>
+        <tr>
+          <td>Last Modified:</td>
+          <td>{{ form.lastModified }}</td>
+        </tr>
+      </table>
 
-      <b>ID : </b> {{ form.patronId }}<br>
-      <b>First Name : </b> {{ form.firstName }}<br>
-      <b>Last Name : </b> {{ form.lastName }}<br>
-      <b>Birthdate : </b> {{ form.birthdate }}<br>
-      <b>Street Address 1 : </b> {{ form.address1 }}<br>
-      <b>Street Addess 2: </b> {{ form.address2 }}<br>
-      <b>City : </b> {{ form.city }}<br>
-      <b>State : </b> {{ form.state }}<br>
-      <b>Zip Code : </b> {{ form.zip }}<br>
-      <b>Phone Number : </b> {{ form.phoneNumber1 }}<br>
-      <b>Phone Number : </b> {{ form.phoneNumber2 }}<br>
-      <b>Email : </b> {{ form.email }}<br>
-      <b>Date Added : </b> {{ form.dateAdded }}<br>
-      <b>Last Modified : </b> {{ form.lastModified }}<br>
-
-
-      <input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update" class="btn btn-info">
-      <input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete" class="btn btn-info">
-
+      <table>
+        <tr>
+          <td><input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update" class="btn btn-info"></td>
+          <td><input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete" class="btn btn-info"></td>
+        </tr>
+      </table>
 
 
     </form>
