@@ -35,6 +35,12 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-expand-lg{
     background-color: #65CCB8;
     color: #F2F2F2;
+
+}
+.navbar-expand-lg:hover{
+    background-color: #F2F2F2 ;
+    color: #182628;
+
 }
 
 .navbar-expand-sm{
