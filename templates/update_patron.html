@@ -2,19 +2,18 @@
 {% block body %}
 <div class="container-fluid">
 
-  <h3>{{ legend }}</h3>
 
   <form method="POST" action="">
 
     {{ form.csrf_token }}
-    <table>
+    <table class="table table-hover table-sm text-left">
       <tr>
         <td>{{ form.patronId.label }}</td>
         <td> {{ form.patronId(size=20, readonly=true) }}</td>
       </tr>
       <tr>
         <td>{{ form.firstName.label }}</td>
-        <td>{{ form.firstName(size=20, ) }}</td>
+        <td>{{ form.firstName(size=20,readonly=true) }}</td>
       </tr>
       <tr>
         <td>{{ form.lastName.label }}</td>
@@ -22,7 +21,7 @@
       </tr>
       <tr>
         <td>{{ form.birthdate.label }}</td>
-        <td>{{ form.birthdate(size=20, ) }}</td>
+        <td>{{ form.birthdate(size=20, readonly=true) }}</td>
       </tr>
       <tr>
         <td>{{ form.address1.label }}</td>

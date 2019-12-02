@@ -10,9 +10,16 @@ import secrets
 import datetime
 from datetime import date, timedelta
 
-
+'''
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
 app = Flask(__name__)
+'''
+dbuser = os.environ.get('DBUSER')
+dbpass = os.environ.get('DBPASS')
+dbhost = os.environ.get('DBHOST')
+dbname = os.environ.get('DBNAME')
+conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(dbuser, dbpass, dbhost, dbname)
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY']='SuperSecretKey'
@@ -218,7 +225,7 @@ def update_material(materialId):
     form.ISBN.data = material.ISBN
     form.dateAdded.data = material.dateAdded
     form.lastModified.data = material.lastModified
-    return render_template('update_material.html', form=form, pageTitle='Update Material',legend="Update A Material")
+    return render_template('update_material.html', form=form, pageTitle='Update Material',)
 
 @app.route('/patron/<int:patronId>/update', methods=['GET','POST'])
 def update_patron(patronId):

@@ -8,61 +8,61 @@
 
 
       {{ form.csrf_token }}
-    <table class="table table-striped table-hover table-sm text-center">
+    <table class="table table-hover table-sm text-left">
       <tr>
-          <td>ID:</td>
+          <td><b>ID: </b></td>
           <td>{{ form.patronId }}</td>
         </tr>
         <tr>
-          <td>First Name:</td>
+          <td><b>First Name: </b></td>
           <td>{{ form.firstName }}</td>
         </tr>
         <tr>
-          <td>Last Name:</td>
+          <td><b>Last Name: </b></td>
           <td>{{ form.lastName }}</td>
         </tr>
         <tr>
-          <td>Birthdate:</td>
+          <td><b>Birthdate: </b></td>
           <td>{{ form.birthdate }}</td>
         </tr>
         <tr>
-          <td>Address 1:</td>
+          <td><b>Address 1: </b></td>
           <td>{{ form.address1 }}</td>
         </tr>
         <tr>
-          <td>Address 2:</td>
+          <td><b>Address 2: </b></td>
           <td>{{ form.address2 }}</td>
         </tr>
         <tr>
-          <td>City:</td>
+          <td><b>City: </b></td>
           <td>{{ form.city }}</td>
         </tr>
         <tr>
-          <td>State:</td>
+          <td><b>State: </b></td>
           <td>{{ form.state }}</td>
         </tr>
         <tr>
-          <td>Zip:</td>
+          <td><b>Zip: </b></td>
           <td>{{ form.zip }}</td>
         </tr>
         <tr>
-          <td>Phone Number 1:</td>
+          <td><b>Phone Number 1: </b></td>
           <td>{{ form.phoneNumber1 }}</td>
         </tr>
         <tr>
-          <td>Phone Number 2:</td>
+          <td><b>Phone Number 2: </b></td>
           <td>{{ form.phoneNumber2 }}</td>
         </tr>
         <tr>
-          <td>Email:</td>
+          <td><b>Email: </b></td>
           <td>{{ form.email }}</td>
         </tr>
         <tr>
-          <td>Date Added:</td>
+          <td><b>Date Added: </b></td>
           <td>{{ form.dateAdded }}</td>
         </tr>
         <tr>
-          <td>Last Modified:</td>
+          <td><b>Last Modified: </b></td>
           <td>{{ form.lastModified }}</td>
         </tr>
       </table>
@@ -70,7 +70,7 @@
       <table>
         <tr>
           <td><input type="submit" formaction="{{url_for('update_patron', patronId=form.patronId)}}" value="Update" class="btn btn-info"></td>
-          <td><input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete" class="btn btn-info"></td>
+          <td><input type="submit" formaction="{{url_for('delete_patron', patronId=form.patronId)}}" value="Delete" class="btn btn-danger"></td>
         </tr>
       </table>
 
