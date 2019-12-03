@@ -83,9 +83,9 @@ class MaterialForm(FlaskForm):
     callNumber = StringField('Call Number: *', validators=[DataRequired()])
     title = StringField('Title: *', validators=[DataRequired()])
     author = StringField('Author: ')
-    publisher = StringField('Publisher: ', validators=[DataRequired()])
+    publisher = StringField('Publisher: ')
     copyright = StringField('Copyright: ')
-    ISBN = IntegerField('ISBN: ', validators=[DataRequired()])
+    ISBN = IntegerField('ISBN: ')
     dateAdded = DateField('Date Added: ')
     lastModified = DateField('Date Last Modified: ')
 
