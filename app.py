@@ -136,7 +136,7 @@ def search_materials():
         form = request.form
         search_value = form['search_materials']
         search = "%{0}%".format(search_value)
-        results = group7_materials.query.filter( or_(group7_materials.title.like(search), group7_materials.author.like(search))).all()
+        results = group7_materials.query.filter( or_(group7_materials.title.like(search),group7_materials.materialId.like(search), group7_materials.author.like(search), group7_materials.publisher.like(search), group7_materials.materialClass.like(search))).all()
         return render_template('materials.html', materials=results, pageTitle='Materials', legend='Search Results')
     else:
         return redirect('/')
@@ -147,7 +147,7 @@ def search_patrons():
         form = request.form
         search_value = form['search_patrons']
         search = "%{0}%".format(search_value)
-        results = group7_patrons.query.filter( or_(group7_patrons.lastName.like(search), group7_patrons.phoneNumber1.like(search), group7_patrons.phoneNumber2.like(search), group7_patrons.email.like(search))).all()
+        results = group7_patrons.query.filter( or_(group7_patrons.firstName.like(search), group7_patrons.lastName.like(search), group7_patrons.phoneNumber1.like(search), group7_patrons.phoneNumber2.like(search), group7_patrons.email.like(search))).all()
         return render_template('patrons.html', patrons=results, pageTitle='Patrons', legend='Search Results')
     else:
         return redirect('/')
