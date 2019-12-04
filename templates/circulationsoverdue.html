@@ -5,10 +5,10 @@
 
 <div class="container-fluid">
 
-<form method ="POST">
-  <input type="text" autofocus="autofocus" name="search_circulation">
-  <input type="submit" formaction="/searchcirculations" value="Search Checked Materials" class="btn btn-info">
-</form>
+  <form method ="POST">
+    <input type="text" autofocus="autofocus" name="search_circulation" placeholder="Search..">
+    <button type="submit" formaction="/searchcirculations" ><i class="fa fa-search"></i></button>
+  </form>
 </div>
 
 {% if circulations %}
@@ -33,7 +33,7 @@
                 <td> {{ row.dayRented }}</td>
                 <td> {{ row.dueDate }}</td>
                 <td> <form action="{{ url_for('check_in', checkoutId=row.checkoutId) }}" method="POST">
-                  <input type="submit" value="Check In" class="btn btn-info" />
+                  <input type="submit" value="Check In" class="btn btn-info" style="background-color: #3B945E; color:#F2F2F2 " />
                 </form>
               </td>
 

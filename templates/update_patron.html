@@ -9,7 +9,7 @@
     <table class="table table-hover table-sm text-left">
       <tr>
         <td>{{ form.patronId.label }}</td>
-        <td> {{ form.patronId(size=20, readonly=true) }}</td>
+        <td> {{ form.patronId(size=20,readonly=true) }}</td>
       </tr>
       <tr>
         <td>{{ form.firstName.label }}</td>
@@ -17,11 +17,11 @@
       </tr>
       <tr>
         <td>{{ form.lastName.label }}</td>
-        <td>{{ form.lastName(size=20, ) }}</td>
+        <td>{{ form.lastName(size=20, readonly=true) }}</td>
       </tr>
       <tr>
         <td>{{ form.birthdate.label }}</td>
-        <td>{{ form.birthdate(size=20, readonly=true) }}</td>
+        <td>{{ form.birthdate(size=20, ) }}</td>
       </tr>
       <tr>
         <td>{{ form.address1.label }}</td>
@@ -67,7 +67,7 @@
 
 
 
-    <input type="submit" value="Save" class="btn btn-info">
+    <input type="submit" value="Save" class="btn btn-info" style="background-color: #3B945E; color:#F2F2F2 ">
 
   </form>
 

@@ -12,12 +12,15 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 30px;
     padding-bottom: 30px;
     margin-bottom: 30px;
-    color: #182628;
-    background-color: white;
+    color: #F2F2F2;
     background-image: url('../static/images/books.jpg');
     background-repeat: no-repeat;
+    background-color: #F2F2F2;
     background-size: 100% 100%;
 }
+
+
+
 
 .btn-primary{
     background-color: #65CCB8;

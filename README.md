@@ -1,24 +1,34 @@
 # f19-msci3300-g6
-Group 6 repository for South Liberty Public Library project
+Group 6 repository for South Liberty Public Library modernization project. The application allows librarians to add/update/search/delete materials to/from the catalog and add/update/search/delete patron accounts. Given a material id and patron id, users can checkout materials from the catalog.
+
+DEVELOPERS
+Lakota Larson, lakota-larson@uiowa.edu
+Alex Schmertmann, alex-schmertmann@uiowa.edu
+Chengze Weng, chengze-weng@uiowa.edu
+Zhehuan Zhang, zhehuan-zhang@uiowa.edu
+
+
+
+SYNTAX FOR CREATE TABLES:
 
 Create Table Materials
 CREATE TABLE group7_materials(
-MaterialID int(11) NOT NULL AUTO_INCREMENT,
-MaterialClass varchar(25) NOT NULL,
-CallNumber varchar(255) NOT NULL,
-Title varchar(255) NOT NULL,
-Author varchar(255),
-Publisher varchar(255) NOT NULL,
-Copyright int(4),
-ISBN int(15) NOT NULL,
-DateAdded DATETIME NOT NULL,
-LastModified DATETIME NOT NULL,
+	MaterialID int(11) NOT NULL AUTO_INCREMENT,
+	MaterialClass varchar(25),
+	CallNumber varchar(255),
+	Title varchar(255) ,
+	Author varchar(255),
+	Publisher varchar(255),
+	Copyright int(4),
+	ISBN int(15) ,
+	DateAdded DATETIME,
+	LastModified DATETIME ,
 PRIMARY KEY (MaterialID)
 )ENGINE=InnoDB AUTO_INCREMENT=1;
 
 USE f19_msci3300;
 
-CREATE TABLE group7_patron(
+CREATE TABLE group7_patrons(
 	patronId int(11) NOT NULL AUTO_INCREMENT,
 	firtName varchar(255) NOT NULL,
 	lastName varchar(255) NOT NULL,
@@ -34,5 +44,14 @@ CREATE TABLE group7_patron(
 PRIMARY KEY ('patronId')
 ) ENGINE =InnoDB AUTO_INCREMENT =1;
 
-INSERT INTO group7_patron(firstName, lastName, birthdate, address1, address2, city, state, zip, phonenumber1, email)
-VALUES ('Robert', 'California', '1/1/1961', 'Apt. # 100', '123 Main St.', 'South Liberty', 'IA', '54345', '3195550001', 'ceo@sabre.com');
+CREATE TABLE group7_circulation(
+	checkoutId int(11) NOT NULL AUTO_INCREMENT,
+	materialId int(11) NOT NULL,
+	patronId int(11) NOT NULL,
+	dayRented DATE NOT NULL,
+	dueDate DATE NOT NULL,
+PRIMARY KEY ('checkoutId')
+FOREIGN KEY (materialId) REFERENCES group7_materials(materialId)
+FOREIGN KEY (patronId) REFERENCES group7_patrons(patronId)
+) ENGINE =InnoDB AUTO_INCREMENT =1
+;

@@ -11,7 +11,7 @@ import datetime
 import os
 from datetime import date, timedelta
 
-'''
+
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
 app = Flask(__name__)
 '''
@@ -20,7 +20,7 @@ dbpass = os.environ.get('DBPASS')
 dbhost = os.environ.get('DBHOST')
 dbname = os.environ.get('DBNAME')
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(dbuser, dbpass, dbhost, dbname)
-
+'''
 
 app = Flask(__name__)
 app.config['SECRET_KEY']='SuperSecretKey'
@@ -93,13 +93,13 @@ class PatronForm(FlaskForm):
     patronId = IntegerField('Patron ID: ')
     firstName = StringField('First Name: *', validators=[DataRequired()])
     lastName = StringField('Last Name: *', validators=[DataRequired()])
-    birthdate = DateField('Birthdate (YYYY-MM-DD): *', )
+    birthdate = DateField('Birthdate (YYYY-MM-DD): *', validators=[DataRequired()])
     address1 = StringField('Address1: ')
     address2 = StringField('Address2: ')
     city = StringField('City: ')
     state = StringField('State: ')
-    zip = IntegerField('Zip: ')
-    phoneNumber1 = IntegerField('Phone Number 1: ')
+    zip = IntegerField('Zip: *',validators=[DataRequired()])
+    phoneNumber1 = IntegerField('Phone Number 1: *', validators=[DataRequired()])
     phoneNumber2 = IntegerField('Phone Number 2: ')
     email = StringField('Email: ')
     dateAdded = DateField('Date Added: ')
