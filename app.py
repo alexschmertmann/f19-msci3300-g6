@@ -293,7 +293,7 @@ def delete_patron(patronId):
 @app.route('/circulations')
 def circulations():
     all_circulations = group7_circulation.query.all()
-    return render_template('circulations.html', circulations=all_circulations, pageTitle='Checked Out Materials',)
+    return render_template('circulations.html', circulations=all_circulations, pageTitle='Checked Out Materials',legend='Checked Out Materials')
 
 @app.route('/circulations/overdue')
 def circulationsoverdue():
